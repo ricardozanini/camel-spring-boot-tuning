@@ -1,0 +1,40 @@
+---
+- name: Installing required software
+  hosts: app_server
+  remote_user: "{{ ansible_ssh_user | default('vagrant') }}"
+  become: yes
+  roles:
+    - geerlingguy.java
+    - bertvv.httpd
+
+- name: Opening Firewall ports
+  hosts: app_server
+  remote_user: "{{ ansible_ssh_user | default('vagrant') }}"
+  become: yes
+  tasks:
+     - systemd:
+          name: firewalld
+          enabled: yes
+          state: started
+
+     - firewalld:
+        port: 12348-12349/tcp 
+        permanent: true
+        state: enabled
+        zone: public
+
+     - firewalld:
+        service: http
+        permanent: true
+        state: enabled
+        zone: public
+
+     - firewalld:
+        service: https
+        permanent: true
+        state: enabled
+        zone: public
+
+     - service:
+          name: firewalld
+          state: reloaded
