@@ -1,6 +1,10 @@
-{ 
-"java_packages": "java-1.8.0-openjdk-devel",
-"spring_boot_application_id" : "camelsvc",
-"spring_boot_file" : "camel-spring-boot-tuning.jar",
-"spring_boot_file_source_local" : "camel-spring-boot-tuning.jar"
-  }
+{
+	"java_packages": "java-1.8.0-openjdk-devel",
+	"spring_boot_application_id": "camelsvc",
+	"spring_boot_file": "camel-spring-boot-tuning.jar",
+	"spring_boot_file_source_local": "camel-spring-boot-tuning.jar",
+	"httpd_StatusEnable": "true",
+	"httpd_StatusRequire": "all granted",
+	"spring_boot_server_port": 8080,
+	"httpd_config_dir": "/etc/httpd/conf.d/"
+}
