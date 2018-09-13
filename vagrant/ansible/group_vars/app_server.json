@@ -1,0 +1,6 @@
+{ 
+"java_packages": "java-1.8.0-openjdk-devel",
+"spring_boot_application_id" : "camelsvc",
+"spring_boot_file" : "camel-spring-boot-tuning.jar",
+"spring_boot_file_source_local" : "camel-spring-boot-tuning.jar"
+  }

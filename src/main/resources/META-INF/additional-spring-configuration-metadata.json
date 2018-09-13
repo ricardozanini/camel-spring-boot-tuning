@@ -1,0 +1,42 @@
+{"properties": [
+  {
+    "name": "mockservice.sleep-sec-origin",
+    "type": "java.lang.Integer",
+    "description": "The origin of sleep secs for the Random function"
+  },
+  {
+    "name": "mockservice.sleep-sec-bound",
+    "type": "java.lang.Integer",
+    "description": "The bound of sleep secs for the Random function"
+  },
+  {
+    "name": "server.tomcat.ajp-port",
+    "type": "java.lang.String",
+    "description": "A description for 'server.tomcat.ajp-port'"
+  },
+  {
+    "name": "server.tomcat.ajp-port",
+    "type": "java.lang.String",
+    "description": "A description for 'server.tomcat.ajp-port'"
+  },
+  {
+    "name": "server.tomcat.max-connections",
+    "type": "java.lang.String",
+    "description": "A description for 'server.tomcat.max-connections'"
+  },
+  {
+    "name": "server.tomcat.max-connections",
+    "type": "java.lang.String",
+    "description": "A description for 'server.tomcat.max-connections'"
+  },
+  {
+    "name": "server.tomcat.accept-count",
+    "type": "java.lang.String",
+    "description": "A description for 'server.tomcat.accept-count'"
+  },
+  {
+    "name": "server.tomcat.accept-count",
+    "type": "java.lang.String",
+    "description": "A description for 'server.tomcat.accept-count'"
+  }
+]}

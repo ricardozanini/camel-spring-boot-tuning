@@ -1,0 +1,19 @@
+spring:
+  main:
+    banner-mode: 'off'
+mockservice:
+  sleepSecOrigin : 1
+  sleepSecBound: 4
+server:
+  port: 8080
+  tomcat:
+    ajp-port: 8081
+camel:
+  springboot:
+    name: CamelRestMockService
+management:
+  port: 8083
+endpoints:
+  enabled: false
+  health:
+    enabled: true

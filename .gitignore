@@ -8,3 +8,5 @@ target
 url
 .vagrant
 *.retry
+*.jar
+.DS_Store

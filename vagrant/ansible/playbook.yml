@@ -3,9 +3,11 @@
   hosts: app_server
   remote_user: "{{ ansible_ssh_user | default('vagrant') }}"
   become: yes
+  become_user: root
   roles:
     - geerlingguy.java
     - bertvv.httpd
+    - zanini.springboot-role
 
 - name: Opening Firewall ports
   hosts: app_server
