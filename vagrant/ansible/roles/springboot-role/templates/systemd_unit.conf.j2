@@ -4,7 +4,7 @@ After=syslog.target
 
 [Service]
 User={{ spring_boot_username }}
-ExecStart=/usr/bin/java -jar {{ spring_boot_file_fq }}
+ExecStart=/usr/bin/java {{ spring_boot_java_opts }} -jar {{ spring_boot_file_fq }} {{ spring_boot_start_opts }} 
 SuccessExitStatus=143
 
 [Install]

@@ -1,73 +1,109 @@
----
+- name: Setting up log and properties for Camel Svc
+  hosts: app_server
+  remote_user: '{{ ansible_ssh_user | default(''vagrant'') }}'
+  become: true
+  become_user: root
+  tasks:
+    - file:
+        path: '/home/{{ spring_boot_application_id }}'
+        state: directory
+        mode: '0755'
+    - template:
+        src: application.yml.j2
+        dest: '{{ spring_boot_user_dir }}/application.yml'
+        mode: '0644'
+    - copy:
+        src: logback.xml
+        dest: '{{ spring_boot_user_dir }}'
+        mode: '0644'
+       
+
 - name: Installing required software
   hosts: app_server
-  remote_user: "{{ ansible_ssh_user | default('vagrant') }}"
-  become: yes
+  remote_user: '{{ ansible_ssh_user | default(''vagrant'') }}'
+  become: true
   become_user: root
   roles:
-    - geerlingguy.java
-    - bertvv.httpd
-    - springboot-role
-
-# httpd extra tasks
+  - geerlingguy.java
+  - spk83.python3
+  - bertvv.httpd
+  - springboot-role
+  
 - name: Opening Firewall ports
   hosts: app_server
-  remote_user: "{{ ansible_ssh_user | default('vagrant') }}"
-  become: yes
+  remote_user: '{{ ansible_ssh_user | default(''vagrant'') }}'
+  become: true
   become_user: root
   tasks:
-     - systemd:
-          name: firewalld
-          enabled: yes
-          state: started
-
-     - firewalld:
-        port: 12348-12349/tcp 
-        permanent: true
-        state: enabled
-        zone: public
-
-     - firewalld:
-        service: http
-        permanent: true
-        state: enabled
-        zone: public
-
-     - firewalld:
-        service: https
-        permanent: true
-        state: enabled
-        zone: public
-
-     - service:
-          name: firewalld
-          state: reloaded
-
+  - systemd:
+      name: firewalld
+      enabled: true
+      state: started
+  - firewalld:
+      port: 12348-12349/tcp
+      permanent: true
+      state: enabled
+      zone: public
+  - firewalld:
+      service: http
+      permanent: true
+      state: enabled
+      zone: public
+  - firewalld:
+      service: https
+      permanent: true
+      state: enabled
+      zone: public
+  - service:
+      name: firewalld
+      state: reloaded
 - name: Configuring Reverse Proxy to Camel Svc
   hosts: app_server
-  remote_user: "{{ ansible_ssh_user | default('vagrant') }}"
-  become: yes
+  remote_user: '{{ ansible_ssh_user | default(''vagrant'') }}'
+  become: true
   tasks:
-     - package:
-          name: libselinux-python
-          state: present
-     - package:
-          name: libsemanage-python
-          state: present
-     # https://confluence.atlassian.com/bitbucketserverkb/permission-denied-in-apache-logs-when-used-as-a-reverse-proxy-790957647.html
-     - seboolean:
-          name: httpd_can_network_connect
-          state: yes
-          persistent: yes
-          
-     - template: 
-          src: camelsvc.conf.j2 
-          dest: "{{ httpd_config_dir }}/camelsvc.conf"
-          owner: root
-          group: root
-          setype: httpd_config_t
-          mode: '0644'
-
-     - service:
-          name: httpd
-          state: restarted
+  - package:
+      name: libselinux-python
+      state: present
+  - package:
+      name: libsemanage-python
+      state: present
+  - seboolean:
+      name: httpd_can_network_connect
+      state: true
+      persistent: true
+  - template:
+      src: camelsvc.conf.j2
+      dest: '{{ httpd_config_dir }}/camelsvc.conf'
+      owner: root
+      group: root
+      setype: httpd_config_t
+      mode: '0644'
+  - service:
+      name: httpd
+      state: restarted
+- name: Creating the mock server
+  hosts: app_server
+  remote_user: '{{ ansible_ssh_user | default(''vagrant'') }}'
+  become: true
+  tasks:
+  - file:
+      path: '/home/{{ spring_boot_application_id }}/mockserver'
+      state: directory
+      owner: '{{ spring_boot_application_id }}'
+      group: '{{ spring_boot_application_id }}'
+      mode: '0755'
+  - copy:
+      src: data.json
+      dest: '/home/{{ spring_boot_application_id }}/mockserver'
+      owner: '{{ spring_boot_application_id }}'
+      group: '{{ spring_boot_application_id }}'
+      mode: '0644'
+  - copy:
+      src: mock_server.py
+      dest: '/home/{{ spring_boot_application_id }}/mockserver'
+      owner: '{{ spring_boot_application_id }}'
+      group: '{{ spring_boot_application_id }}'
+      mode: '0644'
+  - shell: 'cd /home/{{ spring_boot_application_id }}/mockserver; (nohup python3.6 mock_server.py {{ mock_http_server_port }} > /dev/null 2>&1 &)'
+      

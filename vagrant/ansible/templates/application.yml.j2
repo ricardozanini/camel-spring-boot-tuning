@@ -8,11 +8,9 @@ camelsvc:
   sleepSecOrigin: 1
   sleepSecBound: 4
 mockservice:
-  server.port: 9000
+  server.port: {{ mock_http_server_port }}
 server:
-  tomcat:
-    ajp-port: 8081
-  port: 8080
+  port: {{ spring_boot_server_port }}
 camel:
   springboot:
     name: CamelRestMockService

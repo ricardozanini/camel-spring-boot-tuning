@@ -14,6 +14,7 @@ public class ServiceInfo implements Serializable {
     private String ip;
     private Integer sleepSecs;
     private String transactionId;
+    private String data;
 
     public ServiceInfo() {
     }
@@ -58,6 +59,14 @@ public class ServiceInfo implements Serializable {
         this.sleepSecs = sleepSecs;
     }
 
+    public String getData() {
+        return data;
+    }
+    
+    public void setData(String data) {
+        this.data = data;
+    }
+    
     @Override
     public int hashCode() {
         return Objects.hash(this.transactionId, this.ip, this.port, this.serviceName, this.sleepSecs);
