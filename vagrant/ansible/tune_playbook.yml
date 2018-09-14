@@ -1,0 +1,33 @@
+- name: Copy tuned properties
+  hosts: app_server_tuned
+  remote_user: '{{ ansible_ssh_user | default(''vagrant'') }}'
+  become: true
+  become_user: root
+  tasks:
+    - file:
+        path: '/home/{{ spring_boot_application_id }}'
+        state: directory
+        mode: '0755'
+    - template:
+        src: tuned-application.yml.j2
+        dest: '{{ spring_boot_user_dir }}/application.yml'
+        mode: '0644'
+        force: yes
+    - copy:
+        src: async-logback.xml
+        dest: '{{ spring_boot_user_dir }}/logback.xml'
+        mode: '0644'
+        force: yes
+    - copy:
+        src: 00-mpm.conf
+        dest: '/etc/httpd/conf.modules.d'
+        owner: root
+        group: root
+        setype: httpd_config_t
+        mode: '0644'
+    - service:
+        name: httpd
+        state: restarted
+    - service:
+        name: '{{ spring_boot_application_id }}.service'
+        state: restarted

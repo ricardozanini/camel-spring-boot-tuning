@@ -1,0 +1,12 @@
+{
+	"spring_boot_application_id":"camelsvc",
+	"spring_boot_file": "camel-spring-boot-tuning.jar",
+	"spring_boot_file_source_local": "camel-spring-boot-tuning.jar",
+	"spring_boot_user_dir": "/home/{{ spring_boot_application_id }}",
+	"spring_boot_log_folder": "{{spring_boot_user_dir}}/log",
+	"jmx_rmi_port": 12348,
+	"jmx_remote_port": 12349,
+	"jmx_opts":"-Dcom.sun.management.jmxremote -Djava.rmi.server.hostname={{ ansible_hostname }}.local -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.rmi.port={{ jmx_rmi_port }} -Dcom.sun.management.jmxremote.port={{jmx_remote_port}} -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false",
+	"gc_opts" : "-XX:+PrintGCApplicationStoppedTime -XX:+PrintGCTimeStamps -XX:+PrintGCDetails -Xloggc:{{ spring_boot_log_folder }}/gc.log -verbose:gc -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath={{ spring_boot_log_folder }}",
+	"spring_boot_server_port": 8080
+}

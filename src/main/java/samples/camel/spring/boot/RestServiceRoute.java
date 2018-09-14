@@ -64,8 +64,8 @@ public class RestServiceRoute extends RouteBuilder {
 				e.getIn().setBody(serviceInfo, ServiceInfo.class);
 			})
 			.setHeader(Exchange.HTTP_RESPONSE_CODE, constant(200))
-			.log("waiting ${in.body.sleepSecs} seconds to reply")
-			.delay(GroovyLanguage.groovy("exchange.in.body.sleepSecs * 1000"))
+			//.log("waiting ${in.body.sleepSecs} seconds to reply")
+			//.delay(GroovyLanguage.groovy("exchange.in.body.sleepSecs * 1000"))
 			.marshal().json(JsonLibrary.Jackson, true)
 			.log("Replying with body: ${in.body}");
 	}

@@ -40,7 +40,7 @@
       enabled: true
       state: started
   - firewalld:
-      port: 12348-12349/tcp
+      port: '{{ jmx_rmi_port }}-{{ jmx_remote_port }}/tcp'
       permanent: true
       state: enabled
       zone: public
@@ -106,4 +106,6 @@
       group: '{{ spring_boot_application_id }}'
       mode: '0644'
   - shell: 'cd /home/{{ spring_boot_application_id }}/mockserver; (nohup python3.6 mock_server.py {{ mock_http_server_port }} > /dev/null 2>&1 &)'
-      
+
+- name: Tuning the machine  
+  import_playbook: tune_playbook.yml

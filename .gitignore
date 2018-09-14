@@ -10,3 +10,6 @@ url
 *.retry
 *.jar
 .DS_Store
+*.log
+results-output*
+*.csv

@@ -1,15 +1,10 @@
 {
 	"java_packages": "java-1.8.0-openjdk-devel",
-	"spring_boot_application_id": "camelsvc",
-	"spring_boot_file": "camel-spring-boot-tuning.jar",
-	"spring_boot_file_source_local": "camel-spring-boot-tuning.jar",
-	"spring_boot_user_dir": "/home/{{ spring_boot_application_id }}",
-	"spring_boot_log_folder": "{{spring_boot_user_dir}}/log",
-	"spring_boot_java_opts" : "-DLOG_DIR={{ spring_boot_log_folder }}",
-	"spring_boot_start_opts" : "--logging.config=file:{{ spring_boot_user_dir }}/logback.xml --spring.config.location=file:{{ spring_boot_user_dir }}/application.yml", 
+	"spring_boot_java_opts": "-DLOG_DIR={{ spring_boot_log_folder }} {{ jmx_opts }} {{ gc_opts }}",
 	"spring_boot_server_port": 8080,
 	"httpd_StatusEnable": "true",
-	"httpd_StatusRequire": "all granted",	
+	"httpd_StatusRequire": "all granted",
 	"httpd_config_dir": "/etc/httpd/conf.d/",
-	"mock_http_server_port": 9000
+	"mock_http_server_port": 9000,
+	"spring_boot_start_opts": "--logging.config=file:{{ spring_boot_user_dir }}/logback.xml --spring.config.location=file:{{ spring_boot_user_dir }}/application.yml"
 }
