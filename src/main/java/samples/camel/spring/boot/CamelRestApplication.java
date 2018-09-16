@@ -1,6 +1,7 @@
 package samples.camel.spring.boot;
 
 import org.apache.catalina.connector.Connector;
+import org.apache.catalina.core.AprLifecycleListener;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -26,6 +27,9 @@ public class CamelRestApplication {
 
     @Value("${server.tomcat.accept-count:#{null}}")
     private Integer acceptCount;
+
+    @Value("${server.tomcat.enable-apr:#{null}}")
+    private Boolean enableApr;
 
     public static void main(String[] args) {
         SpringApplication.run(CamelRestApplication.class, args);
@@ -54,6 +58,9 @@ public class CamelRestApplication {
             Connector ajpConnector = new Connector(PROTOCOL);
             ajpConnector.setPort(ajpPort);
             tomcat.addAdditionalTomcatConnectors(ajpConnector);
+        }
+        if (enableApr) {
+            tomcat.addContextLifecycleListeners(new AprLifecycleListener());
         }
         return tomcat;
     }

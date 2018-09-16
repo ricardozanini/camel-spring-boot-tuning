@@ -1,3 +1,12 @@
+- name: Installing Tomcat APR
+  hosts: app_server_tuned
+  remote_user: '{{ ansible_ssh_user | default(''vagrant'') }}'
+  become: true
+  become_user: root
+  roles:
+  - apache-portable-runtime
+
+
 - name: Copy tuned properties
   hosts: app_server_tuned
   remote_user: '{{ ansible_ssh_user | default(''vagrant'') }}'

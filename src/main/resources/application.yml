@@ -12,6 +12,7 @@ mockservice:
 server:
   tomcat:
     ajp-port: 8081
+    enable-apr: true
   port: 8080
 camel:
   springboot:

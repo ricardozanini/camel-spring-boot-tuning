@@ -12,7 +12,5 @@
 </IfModule>
 
 <Location /svc>
-        ProxyPass http://localhost:{{ spring_boot_server_port }}
-        ProxyPassReverse http://localhost:{{ spring_boot_server_port }}
-        ProxyPassReverseCookiePath / /svc
+        ProxyPass ajp://localhost:{{ spring_boot_server_ajp_port }}
 </Location>

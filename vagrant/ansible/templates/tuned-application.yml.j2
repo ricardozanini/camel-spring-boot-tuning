@@ -11,10 +11,11 @@ server:
   compression:
     enabled: false
   tomcat:
-    ajp-port: 8082
-    max-connections: 300
+    ajp-port: {{ spring_boot_server_ajp_port }}
+    enable-apr: true
+    max-connections: 400
     max-threads: 300
-    min-spare-threads: 200
+    min-spare-threads: 300
     accept-count: 100
   port: {{ spring_boot_server_port }}
 camel:

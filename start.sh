@@ -16,6 +16,6 @@ ansible-galaxy install -r vagrant/ansible/requirements.yml --ignore-errors
 
 cd vagrant
 
-vagrant up app_default app_tuned --provider virtualbox &
-vagrant up app_tuned --provider virtualbox &
+# vagrant up app_default --provider virtualbox
+vagrant up app_tuned --provider virtualbox
 
