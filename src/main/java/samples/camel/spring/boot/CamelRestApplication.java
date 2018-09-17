@@ -28,7 +28,7 @@ public class CamelRestApplication {
     @Value("${server.tomcat.accept-count:#{null}}")
     private Integer acceptCount;
 
-    @Value("${server.tomcat.enable-apr:#{null}}")
+    @Value("${server.tomcat.enable-apr:#{false}}")
     private Boolean enableApr;
 
     public static void main(String[] args) {
@@ -56,12 +56,15 @@ public class CamelRestApplication {
         tomcat.addConnectorCustomizers(this.customizer(tomcat));
         if (ajpPort != null) {
             Connector ajpConnector = new Connector(PROTOCOL);
+            if (enableApr) {
+                tomcat.addContextLifecycleListeners(new AprLifecycleListener());
+                ajpConnector = new Connector("org.apache.coyote.ajp.AjpAprProtocol");
+            }
+            
             ajpConnector.setPort(ajpPort);
             tomcat.addAdditionalTomcatConnectors(ajpConnector);
         }
-        if (enableApr) {
-            tomcat.addContextLifecycleListeners(new AprLifecycleListener());
-        }
+
         return tomcat;
     }
 }

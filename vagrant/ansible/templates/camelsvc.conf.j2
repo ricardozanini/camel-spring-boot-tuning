@@ -1,16 +1,5 @@
-<IfModule mpm_worker_module>
-    ThreadLimit         30
-	ServerLimit         10
-	StartServers        3
-	MinSpareThreads     5
-	MaxSpareThreads     20
-	MaxClients          300
-	ThreadsPerChild     30
-	MaxRequestsPerChild 0
-	Timeout             10
-    ProxyTimeout        10
-</IfModule>
-
 <Location /svc>
-        ProxyPass ajp://localhost:{{ spring_boot_server_ajp_port }}
+        ProxyPass http://localhost:{{ spring_boot_server_port }}
+        ProxyPassReverse http://localhost:{{ spring_boot_server_port }}
+        ProxyPassReverseCookiePath / /svc
 </Location>
