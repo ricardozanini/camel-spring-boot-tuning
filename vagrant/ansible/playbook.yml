@@ -57,6 +57,7 @@
   - service:
       name: firewalld
       state: reloaded
+
 - name: Configuring Reverse Proxy to Camel Svc
   hosts: app_server
   remote_user: '{{ ansible_ssh_user | default(''vagrant'') }}'
@@ -82,6 +83,7 @@
   - service:
       name: httpd
       state: restarted
+
 - name: Creating the mock server
   hosts: app_server
   remote_user: '{{ ansible_ssh_user | default(''vagrant'') }}'

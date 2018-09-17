@@ -1,11 +1,26 @@
 ---
-#- name: Installing Tomcat APR
-#  hosts: app_server_tuned
-#  remote_user: '{{ ansible_ssh_user | default(''vagrant'') }}'
-#  become: true
-#  become_user: root
-#  roles:
-#  - apache-portable-runtime
+- name: Installing Tomcat APR
+  hosts: app_server_tuned
+  remote_user: '{{ ansible_ssh_user | default(''vagrant'') }}'
+  become: true
+  become_user: root
+  tasks:
+    - package:
+        name: openssl-devel
+        state: present
+    - package:
+        name: apr-devel
+        state: present
+    - package:
+        name: gcc
+        state: present
+# check if not installed
+# discover parameters
+# configure
+# install
+# https://github.com/ricardozanini/ansible-role-apr/blob/master/tasks/main.yml
+# http://tomcat.apache.org/native-doc/
+
 - name: Copy tuned properties
   hosts: app_server_tuned
   remote_user: '{{ ansible_ssh_user | default(''vagrant'') }}'
@@ -19,12 +34,16 @@
     - template:
         src: tuned-application.yml.j2
         dest: '{{ spring_boot_user_dir }}/application.yml'
+        owner: '{{ spring_boot_application_id }}'
+        group: '{{ spring_boot_application_id }}' 
         mode: '0644'
         force: yes
     - copy:
         src: async-logback.xml
         dest: '{{ spring_boot_user_dir }}/logback.xml'
         mode: '0644'
+        owner: '{{ spring_boot_application_id }}'
+        group: '{{ spring_boot_application_id }}'
         force: yes
     - copy:
         src: 00-mpm.conf

@@ -57,7 +57,7 @@
         <stringProp name="ThreadGroup.ramp_time">150</stringProp>
         <longProp name="ThreadGroup.start_time">1518646764000</longProp>
         <longProp name="ThreadGroup.end_time">1518646764000</longProp>
-        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration">300</stringProp>
         <stringProp name="ThreadGroup.delay">0</stringProp>
         <boolProp name="ThreadGroup.delayedStart">true</boolProp>
@@ -212,7 +212,7 @@
         <stringProp name="ThreadGroup.ramp_time">150</stringProp>
         <longProp name="ThreadGroup.start_time">1518646764000</longProp>
         <longProp name="ThreadGroup.end_time">1518646764000</longProp>
-        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration">300</stringProp>
         <stringProp name="ThreadGroup.delay">0</stringProp>
         <boolProp name="ThreadGroup.delayedStart">true</boolProp>
