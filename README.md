@@ -19,14 +19,14 @@ In general, the VM `app_tuned` performs almost 300% better:
 
 The VM `app_default` doesn't handle all the requests (150 simultaneous users) during much time, since on our experiments the JVM always crashes.
 
-Please read the blog post about what had been done in this lab regarding tuning. Note that is not that much, but people tend to neglitect the most obsvious tuning points all the time. I hope this can be helpful somehow. I love to write and hack configurations, if you'd like to talk about it, reach me out.
+Please read the blog post about what has been done in this lab regarding tuning. Note that is not that much, but people tend to neglitect the most obsvious tuning points all the time. I hope this can be helpful somehow. I love to write and hack configurations, if you'd like to talk about it, reach me out.
 
 ## Requirements
 
 To run this lab, you're going to need:
 
-1. Vagrant
-    1. VirtualBox for Vagrant provider
+1. [Vagrant](https://www.vagrantup.com/docs/installation/)
+    1. [VirtualBox](https://www.vagrantup.com/docs/virtualbox/) for Vagrant provider
     2. Vagrant Plugin [Hostmanager](https://www.vagrantup.com/docs/cli/plugin.html#plugin-install)
 : `vagrant plugin install vagrant-hostmanager`
 2. [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
