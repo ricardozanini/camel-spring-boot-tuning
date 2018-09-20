@@ -4,12 +4,14 @@ This is the base repository for the Camel Spring Boot Tuning Guide blog post.
 
 The goal of this lab is to have an environment ready for load test a simple REST Camel application deployed in two machines. The fist machine `app_default` is the application installed "as is", without any kind of tuning or fancy configuration. The second one, `app_tuned`, we have modified all the components from the architecture to achieve a more performatic goal. The architecture is illustrated below:
 
+```
 +-----------------------+        +---------------------------+      +------------------------------+
 |                       |        |                           |      |                              |
 |     Apache HTTPD      |        |   Camel Spring Boot App   |      |      Internal Mock Web       |
 |     Reverse Proxy     +------->+     (Embedded Tomcat)     +----->+ (Python Simple HTTP Server)  |
 |                       |        |                           |      |                              |
 +-----------------------+        +---------------------------+      +------------------------------+
+```
 
 In general, the VM `app_tuned` performs almost 300% better:
 
@@ -24,8 +26,8 @@ Please read the blog post about what had been done in this lab regarding tuning.
 To run this lab, you're going to need:
 
 1. Vagrant
-    1.1. VirtualBox for Vagrant provider
-    1.2. Vagrant Plugin [Hostmanager](https://www.vagrantup.com/docs/cli/plugin.html#plugin-install)
+    1. VirtualBox for Vagrant provider
+    2. Vagrant Plugin [Hostmanager](https://www.vagrantup.com/docs/cli/plugin.html#plugin-install)
 : `vagrant plugin install vagrant-hostmanager`
 2. [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 3. [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
@@ -36,13 +38,13 @@ To run this lab, you're going to need:
 
 Having the requirements installed, run the script `start.sh` that will build the application and provision the machines used in this lab. The Ansible playbooks are going to install all software needed to have this lab set.
 
-Then you can run the (JMeter Load Test)[https://github.com/ricardozanini/camel-spring-boot-tuning/blob/master/jmeter/load_test.jmx] to see the results in place. You can `ssh` in the machines (`vagrant ssh app_tuned`) and play with the configurations to see if the application performs even better. If you do, please share your results.
+Then you can run the [JMeter Load Test](https://github.com/ricardozanini/camel-spring-boot-tuning/blob/master/jmeter/load_test.jmx) to see the results in place. You can `ssh` in the machines (`vagrant ssh app_tuned`) and play with the configurations to see if the application performs even better. If you do, please share your results.
 
 After runing your tests, destroy your VMs by runing `./destroy.sh` in the project home.
 
 ### Generating JMeter Reports
 
-1. Configure the `user.properties` on JMeter home according to the (dashboard documentation)[http://jmeter.apache.org/usermanual/generating-dashboard.html]
+1. Configure the `user.properties` on JMeter home according to the [dashboard documentation](http://jmeter.apache.org/usermanual/generating-dashboard.html)
 2. Save the CSV result file on the `Aggregate Report` tab (`$PROJECT_HOME/jmeter/results.csv`)
 3. Generate the report after performing the load test by running `jmeter -g jmeter/results.csv -o jmeter/results-output`.
 
