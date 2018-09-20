@@ -17,6 +17,14 @@ In general, the VM `app_tuned` performs almost 300% better. See the chart below 
 
 ![Transactions Per Second](https://raw.githubusercontent.com/ricardozanini/camel-spring-boot-tuning/master/docs/assets/tps.png)
 
+If we check the VM's load average, there's another surprise:
+
+![Load Average from App Default](https://raw.githubusercontent.com/ricardozanini/camel-spring-boot-tuning/master/docs/assets/load_average_app1.png)
+
+![Load Average from App Tuned](https://raw.githubusercontent.com/ricardozanini/camel-spring-boot-tuning/master/docs/assets/load_average_app2.png)
+
+The `app_default` has the worst performance, while consuming much more resources than the `app_tuned`.
+
 The VM `app_default` doesn't handle all the requests (150 simultaneous users) during much time, since in our experiments its JVM always crashes.
 
 Please read the blog post about what has been done in this lab regarding tuning. Note that is not that much, but people tends to neglect the most obvious tuning aspects all the time. I hope this can be helpful somehow. I love to write and hack configurations, if you'd like to talk about it, reach me out.
