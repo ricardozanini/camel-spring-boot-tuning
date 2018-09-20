@@ -2,7 +2,7 @@
 
 This is the base repository for the Camel Spring Boot Tuning Guide blog post.
 
-The goal of this lab is to have an environment ready for load test a simple REST Camel application deployed in two machines. The fist machine `app_default` is the application installed "as is", without any kind of tuning or fancy configuration. The second one, `app_tuned`, we have modified all the components from the architecture to achieve a more performatic goal. The architecture is illustrated below:
+The goal of this lab is to have an environment ready for load test a simple REST Camel application deployed in two machines. The fist machine `app_default` is the application installed "as is", without any kind of tuning or fancy configuration. The second one, `app_tuned`, all the components from the application architecture have been modified to achieve more performatic requests and reliability. The architecture is illustrated below:
 
 ```
 +-----------------------+        +---------------------------+      +------------------------------+
@@ -13,13 +13,13 @@ The goal of this lab is to have an environment ready for load test a simple REST
 +-----------------------+        +---------------------------+      +------------------------------+
 ```
 
-In general, the VM `app_tuned` performs almost 300% better:
+In general, the VM `app_tuned` performs almost 300% better. See the chart below of one of the load tests run:
 
 ![Transactions Per Second](https://raw.githubusercontent.com/ricardozanini/camel-spring-boot-tuning/master/docs/assets/tps.png)
 
-The VM `app_default` doesn't handle all the requests (150 simultaneous users) during much time, since on our experiments the JVM always crashes.
+The VM `app_default` doesn't handle all the requests (150 simultaneous users) during much time, since in our experiments its JVM always crashes.
 
-Please read the blog post about what has been done in this lab regarding tuning. Note that is not that much, but people tend to neglect the most obsvious tuning points all the time. I hope this can be helpful somehow. I love to write and hack configurations, if you'd like to talk about it, reach me out.
+Please read the blog post about what has been done in this lab regarding tuning. Note that is not that much, but people tends to neglect the most obvious tuning aspects all the time. I hope this can be helpful somehow. I love to write and hack configurations, if you'd like to talk about it, reach me out.
 
 ## Requirements
 
@@ -40,7 +40,7 @@ Having the requirements installed, run the script `start.sh` that will build the
 
 Then you can run the [JMeter Load Test](https://github.com/ricardozanini/camel-spring-boot-tuning/blob/master/jmeter/load_test.jmx) to see the results in place. You can `ssh` in the machines (`vagrant ssh app_tuned`) and play with the configurations to see if the application performs even better. If you do, please share your results.
 
-After runing your tests, destroy your VMs by runing `./destroy.sh` in the project home.
+After runing your tests, you can destroy your VMs by runing `./destroy.sh` in the project home.
 
 ### Generating JMeter Reports
 
