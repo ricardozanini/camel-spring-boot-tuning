@@ -19,7 +19,7 @@ In general, the VM `app_tuned` performs almost 300% better:
 
 The VM `app_default` doesn't handle all the requests (150 simultaneous users) during much time, since on our experiments the JVM always crashes.
 
-Please read the blog post about what has been done in this lab regarding tuning. Note that is not that much, but people tend to neglitect the most obsvious tuning points all the time. I hope this can be helpful somehow. I love to write and hack configurations, if you'd like to talk about it, reach me out.
+Please read the blog post about what has been done in this lab regarding tuning. Note that is not that much, but people tend to neglect the most obsvious tuning points all the time. I hope this can be helpful somehow. I love to write and hack configurations, if you'd like to talk about it, reach me out.
 
 ## Requirements
 
