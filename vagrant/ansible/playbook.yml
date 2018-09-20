@@ -54,6 +54,11 @@
       permanent: true
       state: enabled
       zone: public
+  - firewalld:
+      port: 44321/tcp
+      permanent: true
+      state: enabled
+      zone: public
   - service:
       name: firewalld
       state: reloaded
@@ -108,6 +113,23 @@
       group: '{{ spring_boot_application_id }}'
       mode: '0644'
   - shell: 'cd /home/{{ spring_boot_application_id }}/mockserver; (nohup python3.6 mock_server.py {{ mock_http_server_port }} > /dev/null 2>&1 &)'
+  
+- name: Enabling pcp
+  hosts: app_server
+  remote_user: '{{ ansible_ssh_user | default(''vagrant'') }}'
+  become: true
+  tasks:
+    - package: 
+        name: pcp
+        state: present
+    - service:
+        name: pmcd
+        enabled: yes
+        state: started
+    - service:
+        name: pmlogger
+        enabled: yes
+        state: started
 
 - name: Tuning the machine  
   import_playbook: tune_playbook.yml

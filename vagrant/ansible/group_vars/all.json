@@ -1,7 +1,7 @@
 {
 	"spring_boot_application_id":"camelsvc",
 	"spring_boot_file": "camel-spring-boot-tuning.jar",
-	"spring_boot_file_source_local": "camel-spring-boot-tuning.jar",
+	"spring_boot_file_source_local": "files/camel-spring-boot-tuning.jar",
 	"spring_boot_user_dir": "/home/{{ spring_boot_application_id }}",
 	"spring_boot_log_folder": "{{spring_boot_user_dir}}/log",
 	"jmx_rmi_port": 12348,
