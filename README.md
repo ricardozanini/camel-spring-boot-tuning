@@ -41,6 +41,8 @@ To run this lab, you're going to need:
 3. [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
 4. [JMeter](https://jmeter.apache.org/download_jmeter.cgi) for load tests
 5. [PCP Vector](https://rhelblog.redhat.com/2015/12/18/getting-started-using-performance-co-pilot-and-vector-for-browser-based-metric-visualizations/) to collect the VM metrics (optional)
+6. [JVisualVM](https://visualvm.github.io/) to collect JVM metrics like GC behavior (optional)
+7. [Maven](https://maven.apache.org/) to build and deploy the application
 
 ## How to use
 
@@ -62,5 +64,9 @@ Both machines are provisioned with `pcp` installed and enabled. To view your met
 
 * http://localhost:44323/vector/index.html#/?host=localhost:44323&hostspec=app.local
 * http://localhost:44323/vector/index.html#/?host=localhost:44323&hostspec=app2.local
+
+### Viewing JVM Metrics
+
+The JMX management is available at te port `12349`. Just add this port to your favorite JMX management tool and start extracting JVM metrics during your load tests.
 
 Enjoy!
